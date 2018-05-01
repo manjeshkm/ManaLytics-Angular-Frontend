@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-6">
+    <form #pform="ngForm" (ngSubmit)="edit(pform.value)">
+      <div class="form-group">
+        <label for="pname">Product Name:</label>
+        <input type="text" [(ngModel)]="product.pname" name="pname" id="pname" #pname="ngModel" required class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="pquantity">Quantity:</label>
+        <input type="number" [(ngModel)]="product.pqvalue" name="pqvalue" #pquantity="ngModel" class="form-control" id="pquantity"
+          aria-describedby="pquantity">
+        <div>
+          <select [(ngModel)]="product.pqtype" name="pqtype" #ptype="ngModel">
+            <option *ngFor="let opt of quantOptions" [ngValue]="opt">{{opt}}</option>
+          </select>
+        </div>
+      </div>
+      <label for="pcost">Cost:</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">INR</span>
+        </div>
+        <input type="number" class="form-control" id="pcost" #pcost="ngModel" [(ngModel)]="product.pcost" name="pcost">
+        <div *ngIf="!(ptype.value == 'Select')" class="input-group-append">
+          <span class="input-group-text">/{{pform.value.pqtype}}</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="purl">Product Image:</label>
+        <input type="text" #purl="ngModel" [(ngModel)]="product.purl" name="purl" id="purl" required class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="pdescrp">Discription:</label>
+        <textarea #pdescrp="ngModel" ngModel name="pdescrp" id="descrp" rows="4" placeholder="write about the edit info of the product,this will be saved in history for your future use..."
+          required class="form-control"></textarea>
+      </div>
+      <p>{{pform.value | json}}</p>
+      <button class="btn btn-primary">Save Product</button>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <div class="card" style="width: 20rem;">
+      <img class="card-img-top" [src]="product.purl" *ngIf="product.purl">
+      <div class="card-body">
+        <h5 class="card-title">{{product.pname}}</h5>
+        <p *ngIf="!(ptype.value == 'Select')" class="card-text">Quantity:{{product.pqvalue}}{{product.pqtype}}</p>
+        <p *ngIf="(pcost.value >= '0')">Cost:{{product.pcost}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<mat-form-field>
+  <input matInput ngModel name="fromDate" #fromDate="ngModel" (focus)="fpicker.open()" [matDatepicker]="fpicker" required placeholder="Choose a from date">
+  <mat-datepicker-toggle matPrefix [for]="fpicker"></mat-datepicker-toggle>
+  <mat-datepicker #fpicker touchUi="true"></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput ngModel name="toDate" #toDate="ngModel" [min]="fromDate.value" (focus)="picker.open()" (blur)="getDate(fromDate.value,toDate.value)" [matDatepicker]="picker"  required placeholder="Choose a to date">
+  <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker touchUi="true"></mat-datepicker>
+</mat-form-field>
+<table class="table">
+  <thead>
+    <tr class="sticky-top">
+      <th>Date</th>
+      <th>Time</th>
+      <th>Event</th>
+      <th>Product</th>
+      <th>Detais</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let h of history$ | async ">
+      <td>{{h.edate}}</td>
+      <td>{{h.etime}}</td>
+      <td>{{h.event}}</td>
+      <td>{{h.pname}}</td>
+      <td>{{h.pdescrp}}</td>
+    </tr>
+  </tbody>
+</table>
