@@ -16,12 +16,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { BillingKartComponent } from './billing-kart/billing-kart.component';
 
 const appRoutes: Routes = [
   { path: 'createproduct', component: CreateProductComponent },
   { path: 'products/:id', component: EditProductComponent },
   { path: 'products', component: ViewProductsComponent },
-  { path: 'histroy', component: HistroyComponent }
+  { path: 'histroy', component: HistroyComponent },
+  { path: 'billingkart', component: BillingKartComponent }
 ];
 
 @NgModule({
@@ -30,7 +32,8 @@ const appRoutes: Routes = [
     CreateProductComponent,
     ViewProductsComponent,
     EditProductComponent,
-    HistroyComponent
+    HistroyComponent,
+    BillingKartComponent
   ],
   imports: [
     MatCheckboxModule,
