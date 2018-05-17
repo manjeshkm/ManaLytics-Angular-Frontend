@@ -1,5 +1,5 @@
 <mat-form-field>
-  <input matInput ngModel name="fromDate" #fromDate="ngModel" (focus)="fpicker.open()" [matDatepicker]="fpicker" required placeholder="Choose a from date">
+  <input matInput ngModel name="fromDate" #fromDate="ngModel" (focus)="fpicker.open()" (blur)="getDate(fromDate.value,toDate.value)" [matDatepicker]="fpicker" required placeholder="Choose a from date">
   <mat-datepicker-toggle matPrefix [for]="fpicker"></mat-datepicker-toggle>
   <mat-datepicker #fpicker touchUi="true"></mat-datepicker>
 </mat-form-field>
@@ -21,9 +21,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let h of history$ | async ">
-      <td>{{h.edate}}</td>
-      <td>{{h.etime}}</td>
+    <tr *ngFor="let h of history$ | async">
+      <td>{{h.edate | date:'MMM dd, y'}}</td>
+      <td>{{h.etime | date:'HH:mm:ss a'}}</td>
       <td>{{h.event}}</td>
       <td>{{h.pname}}</td>
       <td>{{h.pdescrp}}</td>

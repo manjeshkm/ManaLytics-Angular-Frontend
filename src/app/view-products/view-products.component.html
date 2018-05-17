@@ -8,6 +8,7 @@
     <thead>
         <tr class="sticky-top">
             <th>To-Bill</th>
+            <th>Id</th>
             <th>Product</th>
             <th>Quantity</th>
             <th>Cost</th>
@@ -17,8 +18,9 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let p of products$ | async ">
+        <tr *ngFor="let p of products$ | async">
             <td><mat-checkbox #check (change)="addToBill(check.checked,p)"></mat-checkbox></td>
+            <td>{{p.id}}</td>
             <td>{{p.pname}}</td>
             <td>{{p.pqvalue | number}} {{p.pqtype}}</td>
             <td>Rs{{p.pcost}}/-</td>

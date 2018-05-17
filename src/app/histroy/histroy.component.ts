@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { Producthistory } from '../Models/producthistory';
 
 
 @Component({
@@ -14,20 +15,25 @@ export class HistroyComponent implements OnInit {
   history$: Observable<Object>;
   ngOnInit() {
     // tslint:disable-next-line:arrow-return-shorthand
-    this.history$ = this.productservice.getAll('history?_sort=edate,etime&_order=desc,desc');
+   this.history$ = this.productservice.getAll('history');
     // console.log(this.fromDate);
   }
 
   getDate(fdate, tdate) {
-    if (fdate === '' || tdate === '') {
-      fdate = new Date();
-      tdate = new Date();
+    let fromDate; let toDate;
+    if (fdate === '') { fromDate = new Date().toLocaleDateString(); }
+     if ( tdate === '') {
+      toDate = new Date().toLocaleDateString();
+    } if (fdate !== '' || tdate !== '') {
+      fromDate = fdate.toLocaleDateString();
+      toDate = tdate.toLocaleDateString();
     }
+    console.log('fromDate---->' + fromDate   + 'toDate--->' + toDate);
     // tslint:disable-next-line:prefer-const
-    let fromDate = fdate.toLocaleDateString();
+    let from = fdate;
     // tslint:disable-next-line:prefer-const
-    let toDate = tdate.toLocaleDateString();
-    this.history$ = this.productservice.getAll('history?edate_gte=' + fromDate + '&edate_lte=' + toDate);
-    console.log('in get date' + fromDate, toDate);
+    let to = tdate;
+    this.history$ = this.productservice.getAll('history/event?from=' + fromDate + '&to=' + toDate);
+    console.log('history---->>>>' + this.history$);
   }
 }

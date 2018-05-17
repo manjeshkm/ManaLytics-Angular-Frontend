@@ -1,6 +1,6 @@
 export interface Producthistory {
-    edate: string;
-    etime: string;
+    edate: Date;
+    etime: Date;
     pname: string;
     event: string;
     pdescrp: string;

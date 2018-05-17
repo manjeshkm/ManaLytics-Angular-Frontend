@@ -32,6 +32,6 @@ export class CreateProductComponent {
         this.productservice.addEvent('ADDED', product);
       });
     this.router.navigateByUrl('/products');
-    location.reload();
+    // location.reload();
   }
 }

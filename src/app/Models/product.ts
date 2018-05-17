@@ -11,11 +11,12 @@ export interface Product {
     //         this.purl = purl;
     //         this.pTimestamp = 0;
     //     }
-pname: string;
-pqvalue: number;
-pqtype: string;
-pcost: number;
-purl: string;
-pdescrp: string;
-// pTimestamp: number;
+    id: number;
+    pname: string;
+    pqvalue: number;
+    pqtype: string;
+    pcost: number;
+    purl: string;
+    pdescrp: string;
+    // pTimestamp: number;
 }

@@ -13,7 +13,7 @@ import { Producthistory } from '../Models/producthistory';
   styleUrls: ['./view-products.component.css']
 })
 export class ViewProductsComponent implements OnInit {
-  product: Product = { 'pname': '', 'pqvalue': 0, 'pqtype': '', 'pcost': 0, 'purl': '', 'pdescrp': '' };
+  product: Product = {'id': 0, 'pname': '', 'pqvalue': 0, 'pqtype': '', 'pcost': 0, 'purl': '', 'pdescrp': '' };
   constructor(private productservice: ProductService, private router: Router) { }
   products$: Observable<Object>;
   ngOnInit() {
@@ -24,7 +24,7 @@ export class ViewProductsComponent implements OnInit {
   delete(pid) {
     if (confirm('Are you sure you want to Delete this product')) {
       this.productservice.getById('products', pid).subscribe(resp => {
-        this.product = resp[0];
+        this.product = resp;
         console.log(this.product);
       });
       this.productservice.delete('products', pid).subscribe(resp => console.log(resp),
@@ -34,7 +34,8 @@ export class ViewProductsComponent implements OnInit {
         () => {
           this.productservice.addEvent('DELETED', this.product);
         });
-      location.reload();
+        this.router.navigateByUrl('/products');
+       location.reload();
     }
   }
   addToBill(checked, produc) {
